@@ -62,13 +62,13 @@
         'Biden, Joseph',
         'Bierce, Ambrose',
         'Biko, Steve',
+        'Blake, William',
         'Billings, Josh',
         'Biondo, Frank',
         'Birrell, Augustine',
         'Black, Elk',
         'Blair, Robert',
         'Blair, Tony',
-        'Blake, William',
       ];
 
       // Array.prototype.filter()
@@ -97,18 +97,48 @@
 
       // Array.prototype.reduce()
       // 4. How many years did all the inventors live all together?
-
+      let totalYears = inventors.reduce((total, inventor) => {
+        return total + (inventor.passed - inventor.year);
+      }, 0);
+      console.log('totalYears', totalYears);
       // 5. Sort the inventors by years lived
+
+      let sortInventorsByAge = inventors.sort((a, b) => (a.passed - a.year > b.passed - b.year ? 1 : -1));
+      console.table(sortInventors);
+      // check the result
+      let newInventors = inventors.map((inventor) => {
+        let age = inventor.passed - inventor.year;
+        return { ...inventor, ageInv: age };
+      });
+      console.table(newInventors.sort((a, b) => (a.ageInv > b.ageInv ? 1 : -1)));
 
       // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
       // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+      // let category = document.querySelector('.mw-category');
+      // let links = [...category.querySelectorAll('a')];
+      // let de = links.map((link) => link.textContent).filter((streetName) => streetName.includes('de'));
 
       // 7. sort Exercise
       // Sort the people alphabetically by last name
+      let sortPeople = people.sort((lastOne, nextOne) => {
+        let [aLast, aFirst] = lastOne.split(', ');
+        let [bLast, bFirst] = nextOne.split(', ');
+        return aLast > bLast ? 1 : -1;
+      });
+      console.log(sortPeople);
 
       // 8. Reduce Exercise
       // Sum up the instances of each of these
       const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck'];
+
+      let numberOftransportation = data.reduce((result, item) => {
+        if (!result[item]) {
+          result[item] = 0;
+        }
+        result[item]++;
+        return result;
+      }, {});
+      console.log(numberOftransportation);
     </script>
   </body>
 </html>
